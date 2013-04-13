@@ -2,6 +2,7 @@ require "spec_helper"
 require 'radiator_reader'
 
 describe RadiatorReader do
+  use_vcr_cassette
   RadiatorReader::SPREADSHEET_KEYS = ["0ApUPwJdQvqT_dDI0X3ZUSUFSSkFRa19oMEZUakVDZGc"]
 
   describe "Read Radiator Data from a Google SpreadSheet(s)" do

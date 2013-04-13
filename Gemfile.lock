@@ -17,9 +17,11 @@ GEM
       sprockets
       thin
       thor
+    diff-lcs (1.2.3)
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    fakeweb (1.3.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     google_drive (0.3.5)
@@ -47,6 +49,14 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    rspec (2.13.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
+    rspec-core (2.13.1)
+    rspec-expectations (2.13.0)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.13.1)
     rufus-scheduler (2.0.18)
       tzinfo (>= 0.3.23)
     sass (3.1.20)
@@ -72,11 +82,15 @@ GEM
     thor (0.14.6)
     tilt (1.3.6)
     tzinfo (0.3.33)
+    vcr (2.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   dashing
+  fakeweb
   google_drive
   rack (= 1.4.1)
+  rspec
+  vcr
