@@ -1,7 +1,7 @@
 require 'google_drive'
 class RadiatorReader
   SPREADSHEET_KEYS = ["0Am5kxIePmFmbdFBrWElZZW5jZVQwODRpRXNsMEFWRkE",
-                    "0Agj1177vtu0MdGI2OVVWcXhUYTNtTDl4SFM2djlESXc"]
+                    "0Agj1177vtu0MdGI2OVVWcXhUYTNtTDl4SFM2djlESXc","0Agj1177vtu0MdElYdnZpb0ctaERXN2VnVmRmR3g3REE"]
   def initialize
     @project_radiator_data = {}
   end
