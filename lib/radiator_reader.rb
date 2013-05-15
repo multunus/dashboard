@@ -34,9 +34,10 @@ class RadiatorReader
 
   def append_radiator_data_for_given_project_row(doc,row)
     project_name = doc[row,1]
-    delivery_schedule_data = {:date => "", :status => ""}
+    delivery_schedule_data = {:pt_status => "", :status => ""}
     progress_spreadsheet_key = PROGRESS_SPREADSHEET_KEYS[project_name.downcase]
     delivery_schedule_data = fetch_delivery_schedule_data_for_project project_name unless progress_spreadsheet_key.nil?
+    puts delivery_schedule_data
     data = fetch_data_if_exists_for_project_to_append_more_data(project_name)
     for col in 2..doc.num_cols
       add_radiator_data(data, doc, row, col,  delivery_schedule_data)
@@ -45,9 +46,9 @@ class RadiatorReader
 
   def add_radiator_data(data, doc, row, col,  delivery_schedule_data)
     if doc[1, col].downcase == "Delivery Schedule".downcase
-      data << {label: doc[1,col], modified_date: delivery_schedule_data[:date], class: "label-#{delivery_schedule_data[:status].downcase}"}
+      data << {label: doc[1,col], progress_track_updated_status_class: "progress-track-updated-#{delivery_schedule_data[:pt_status]}", class: "label-#{delivery_schedule_data[:status].downcase}"}
     else
-      data << {label: doc[1,col], class: "label-#{doc[row,col].downcase}", modified_date: doc.title }
+      data << {label: doc[1,col], progress_track_updated_status_class: "progress-track-updated-yes", class: "label-#{doc[row,col].downcase}"}
     end
   end
 
@@ -55,11 +56,28 @@ class RadiatorReader
     begin
       doc = @session.spreadsheet_by_key(PROGRESS_SPREADSHEET_KEYS[project_name.downcase]).worksheets[0]
       last_modified_date_row = 2
-      d = Date.strptime(doc[last_modified_date_row, 1], "%m/%d/%y").strftime("%b %dth")
-      {:date => d, :status => doc[last_modified_date_row, 2]}
+      {:pt_status => progress_track_updated_status(format_progress_track_updated_date(doc[last_modified_date_row, 1])), :status => doc[last_modified_date_row, 2]}
     rescue Exception => e
-      delivery_schedule_data = {:date => "", :status => ""}
+      delivery_schedule_data = {:pt_status => "", :status => ""}
     end
+  end
+
+  def format_progress_track_updated_date(progress_track_updated_date)
+    Date.strptime(progress_track_updated_date, "%m/%d/%y").strftime("%b-%d")
+  end
+
+  def format_radiator_updated_date(radiator_updated_date)
+    Date.strptime(radiator_updated_date, "%m/%d/%y").strftime("%b %dth")
+  end
+
+  def progress_track_updated_status(progress_track_updated_date)
+    today_date = Date.today.to_s
+    progress_track_updated_status =  "yes"
+    progress_track_updated_status =  "no" if (DateTime.parse(today_date) - DateTime.parse(progress_track_updated_date)).to_i > 1
+    progress_track_updated_status
+  end
+
+  def radiator_updated_status(radiator_updated_date)
   end
 
   def fetch_data_if_exists_for_project_to_append_more_data(project_name)
