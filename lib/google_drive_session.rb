@@ -4,8 +4,7 @@ class GoogleDriveSession
   include Singleton
   
   def initialize
-    puts "Inside INITIALIZE"
-    @session = GoogleDrive.login('sandeep.v@multunus.com', 'separtir')
+    @session = GoogleDrive.login(ENV['USER_NAME'],ENV['PASSWORD'])
   end
 
   def session

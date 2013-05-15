@@ -17,8 +17,6 @@ class RadiatorReader
   end
 
   def read_data
-    puts "INSIDE read_data"
-    puts @session.inspect
     for item in 0..SPREADSHEET_KEYS.size - 1
       doc = @session.spreadsheet_by_key(SPREADSHEET_KEYS[item]).worksheets[0]
       read_each_project_data_as_row(doc)
@@ -56,9 +54,9 @@ class RadiatorReader
   def fetch_delivery_schedule_data_for_project(project_name)
     begin
       doc = @session.spreadsheet_by_key(PROGRESS_SPREADSHEET_KEYS[project_name.downcase]).worksheets[0]
-      rows = doc.num_rows
-      d = Date.strptime(doc[rows, 1], "%m/%d/%y").strftime("%b %dth")
-      {:date => d, :status => doc[rows, 2]}
+      last_modified_date_row = 2
+      d = Date.strptime(doc[last_modified_date_row, 1], "%m/%d/%y").strftime("%b %dth")
+      {:date => d, :status => doc[last_modified_date_row, 2]}
     rescue Exception => e
       delivery_schedule_data = {:date => "", :status => ""}
     end
