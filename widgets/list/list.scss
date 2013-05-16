@@ -67,16 +67,12 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     color: $moreinfo-color;
   }
 
-  .progress-track-updated-yes {
-      display: none;
-  }
-
-  .progress-track-updated-no {
-      width: 20px;
+  .angry-icon-show {
+      width: 15px;
       display: visible;
   }
 
-  .angry-icon {
+  .angry-icon-hide {
       display:none;
   }
 
