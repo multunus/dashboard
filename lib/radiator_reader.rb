@@ -75,7 +75,7 @@ class RadiatorReader
   def get_updated_status(updated_date, update_frequency_in_days)
     formated_date = Date.strptime(updated_date, "%m/%d/%Y").strftime("%b-%d")
     todays_date = Date.today.to_s
-    if(Date.today.wday == 2) 
+    if(Date.today.wday == 1) 
       modified_todays_date = DateTime.now.to_date - 2
       (DateTime.parse(modified_todays_date.to_s) - DateTime.parse(formated_date)).to_i > update_frequency_in_days ? "show" : "hide" 
     else
