@@ -7,8 +7,7 @@ class RadiatorReader
 
   PROGRESS_SPREADSHEET_KEYS = {
     "menume" => "0ArY8tIav5XnMdFNSV2hJQXlCNG94cUdUZnBGTkhrbWc",
-    "narrable" => "0Amkau_yET23PdFNzQ2NZY1FMUV93WnVhMmd3QkxIWmc",
-    "tims" => "0AurK0h8yI6n6dGJVNm13Q2tQUUI2VXBCTzdVMDVMRUE"
+    "narrable" => "0Amkau_yET23PdFNzQ2NZY1FMUV93WnVhMmd3QkxIWmc"
   }
 
   PROGRESS_TRACK_UPDATE_FREQUENCY_IN_DAYS = 1
