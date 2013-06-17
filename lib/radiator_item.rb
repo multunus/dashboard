@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'business_time'
 
 class RadiatorItem
   attr_accessor :name
@@ -22,7 +23,7 @@ class RadiatorItem
 
   def updated_recently?
     return false if @last_updated.blank?
-    ((DateTime.now.to_date - @last_updated)).round <= last_update_date_in_days
+    last_update_date_in_days.business_days.ago <= @last_updated
   end
   
   private

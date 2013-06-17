@@ -64,6 +64,7 @@ end
 
 describe RadiatorItem do
   before(:all) do
+    DateTime.should_receive(:now) { Date.parse("17-Jun-2013") }
     @radiator_item = RadiatorItem.new("Objective Quality", "Yes", DateTime.now.to_date.strftime("%m/%d/%Y"))
   end
 
@@ -71,14 +72,14 @@ describe RadiatorItem do
     @radiator_item.to_widget_data.should == {:label=> "Objective Quality", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"}
   end
 
-  it "should be recently updated if last update date is less than 7 days" do
-    RadiatorItem.new("Objective Quality", "Yes", 8.days.ago).should_not be_updated_recently
-    RadiatorItem.new("Objective Quality", "Yes", 6.days.ago).should be_updated_recently
+  it "should be recently updated if last update date is less than 7 working days" do
+    RadiatorItem.new("Objective Quality", "Yes", 12.days.ago).should_not be_updated_recently
+    RadiatorItem.new("Objective Quality", "Yes", 10.days.ago).should be_updated_recently
   end
 
-  it "should be recently updated if last updated date is less than 2 days and it is the delivery schedule" do
-    RadiatorItem.new("Delivery Schedule", "Yes", 2.days.ago).should_not be_updated_recently
-    RadiatorItem.new("Delivery Schedule", "Yes", 1.days.ago).should be_updated_recently
+  it "should be recently updated if last updated date is less than 2 working days and it is the delivery schedule" do
+    RadiatorItem.new("Delivery Schedule", "Yes", 3.days.ago).should_not be_updated_recently
+    RadiatorItem.new("Delivery Schedule", "Yes", 2.days.ago).should be_updated_recently
   end
 
 end
