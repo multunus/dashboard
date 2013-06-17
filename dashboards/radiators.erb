@@ -5,7 +5,7 @@
   <ul>
   <% reader.projects.each do |project| %>
    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="narrable" data-view="List" data-unordered="true" data-title="<%= project.name %>" data-moreinfo=""></div>
+      <div data-id="<%= project.name.downcase %>" data-view="List" data-unordered="true" data-title="<%= project.name %>" data-moreinfo=""></div>
    </li>
   <% end %>
   </ul>
