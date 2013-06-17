@@ -1,14 +1,12 @@
 <% content_for(:title) { "Project Status Dashboard" } %>
 <div class="gridster">
+  <% reader = ProjectRadiatorReader.new %>
+  <% reader.fetch %>
   <ul>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="narrable" data-view="List" data-unordered="true" data-title="Narrable" data-moreinfo=""></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="menume" data-view="List" data-unordered="true" data-title="MenuMe" data-moreinfo=""></div>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="tims" data-view="List" data-unordered="true" data-title="TIMS" data-moreinfo=""></div>
-    </li>
+  <% reader.projects.each do |project| %>
+   <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="narrable" data-view="List" data-unordered="true" data-title="<%= project.name %>" data-moreinfo=""></div>
+   </li>
+  <% end %>
   </ul>
 </div>
