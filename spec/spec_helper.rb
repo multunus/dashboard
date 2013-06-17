@@ -7,6 +7,7 @@
 require 'vcr'
 
 VCR.config do |c|
+  c.allow_http_connections_when_no_cassette = true
   c.cassette_library_dir     = 'spec/cassettes'
   c.stub_with                :fakeweb
   c.default_cassette_options = { :record => :new_episodes }
@@ -23,4 +24,12 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+end
+
+def load_test_spreadsheets
+  ProjectRadiatorReader::config[:project_radiator_key] = "0Ao0uXCuPaqQVdFl6UUJsOHh1NzRDczA4bTFFbzdQOEE"
+  ProjectRadiatorReader::config[:progress_tracker_keys] = {
+    "Menume" => "0Ao0uXCuPaqQVdEljRmVlWFZHUU54RnF2dkxsSlRwOHc",
+    "Narrable" => "0Ao0uXCuPaqQVdGJnQjJNMDM2R1REWHg2ZkdXemdfY2c",
+  }
 end

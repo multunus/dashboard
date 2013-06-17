@@ -1,9 +1,13 @@
 require 'google_drive'
 
 SCHEDULER.every '5m', :first_in => 0 do
-  radiators = RadiatorReader.new().read_data
-  radiators.keys.each do | project_name|
-    send_event(project_name.downcase, {items: radiators[project_name]})
+  radiator =  ProjectRadiatorReader.new
+  radiator.fetch
+  projects = radiator.projects.to_widget_data
+
+  projects.keys.each do |project_name|
+    projects = radiator.projects.to_widget_data
+    send_event(project_name.downcase, {items: projects[project_name]})
   end
 end
 
