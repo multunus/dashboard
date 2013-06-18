@@ -23,7 +23,7 @@ class RadiatorItem
 
   def updated_recently?
     return false if @last_updated.blank?
-    last_update_date_in_days.business_days.ago <= @last_updated
+    last_update_date_in_days.business_days.ago.to_date <= @last_updated
   end
   
   private
@@ -31,7 +31,7 @@ class RadiatorItem
   def no_data
     {
       :label => @name,
-      :class => "label",
+      :class => "label-no",
       :progress_track_updated_status_class => "angry-icon-hide"
     }
   end

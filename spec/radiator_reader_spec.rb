@@ -79,7 +79,11 @@ describe RadiatorItem do
 
   it "should be recently updated if last updated date is less than 2 working days and it is the delivery schedule" do
     RadiatorItem.new("Delivery Schedule", "Yes", 3.days.ago).should_not be_updated_recently
-    RadiatorItem.new("Delivery Schedule", "Yes", 2.days.ago).should be_updated_recently
+    RadiatorItem.new("Delivery Schedule", "Yes", 1.days.ago).should be_updated_recently
+  end
+
+  it "should be red if there is no data" do
+    RadiatorItem.new("Objective Quality", nil, nil).to_widget_data[:class].should == "label-no"
   end
 
 end
