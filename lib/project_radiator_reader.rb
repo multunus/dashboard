@@ -15,6 +15,7 @@ class ProjectRadiatorReader
     :progress_tracker_keys => {
       "MenuMe" => "0ArY8tIav5XnMdFNSV2hJQXlCNG94cUdUZnBGTkhrbWc",
       "Narrable" => "0Amkau_yET23PdFNzQ2NZY1FMUV93WnVhMmd3QkxIWmc",
+      "Survey App" => "0AogaA0ekHLqXdHd5SjI2V0E5VTNrY3F3Qlp3MmxZb1E"
     }
   }
 
