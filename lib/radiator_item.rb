@@ -4,7 +4,7 @@ require 'business_time'
 class RadiatorItem
   attr_accessor :name
 
-  RADIATORS_UPDATE_FREQUENCY_IN_DAYS = 7
+  RADIATORS_UPDATE_FREQUENCY_IN_DAYS = 4
   PROGRESS_TRACK_UPDATE_FREQUENCY_IN_DAYS = 1
   
   def initialize(name,status,last_updated)
