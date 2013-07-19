@@ -16,7 +16,6 @@ class ProjectRadiatorReader
       "MenuMe" => "0ArY8tIav5XnMdFNSV2hJQXlCNG94cUdUZnBGTkhrbWc",
       "Narrable" => "0Amkau_yET23PdFNzQ2NZY1FMUV93WnVhMmd3QkxIWmc",
       "CMH" => "0Amkau_yET23PdFRsNlBoVXpGeE12UjBHbXdzMHJodmc",
-      "SW" => "0An7HDRra1JxidE1uRU84VEhTaXhsWFItY3pQYW14SUE"
     }
   }
 
