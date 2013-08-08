@@ -8,8 +8,13 @@ class RadiatorItem
   PROGRESS_TRACK_UPDATE_FREQUENCY_IN_DAYS = 1
   
   def initialize(name,status,last_updated)
+    puts "name #{name} status #{status} last_updated #{last_updated}"
     @name, @status = name,status
-    @last_updated = last_updated.is_a?(String) ? Date.strptime(last_updated.chomp,'%m/%d/%Y') : last_updated.to_date unless last_updated.blank?
+    begin
+      @last_updated = last_updated.is_a?(String) ? Date.strptime(last_updated.chomp,'%m/%d/%Y') : last_updated.to_date unless last_updated.blank?
+    rescue 
+      @last_updated = nil
+    end
   end
 
   def to_widget_data

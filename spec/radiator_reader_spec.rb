@@ -29,14 +29,14 @@ describe ProjectRadiatorReader do
 
     it "should return the widget data" do
       narrable_expected_widget_data = [
-                                       {:label=> "Objective Quality", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "User Experience", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "Deployments", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "GPA Score", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "Pairing", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "Security & Performance", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=> "Community Involvement", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"},
-                                       {:label=>"Delivery Schedule", :class=>"label-yes",:progress_track_updated_status_class=>"angry-icon-hide"}
+                                       {:label=> "Objective Quality", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "User Experience", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "Deployments", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "GPA Score", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "Pairing", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "Security & Performance", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=> "Community Involvement", :progress_track_updated_status_class=>"angry-icon-show", :class=>"label-yes"},
+                                       {:label=>"Delivery Schedule", :class=>"label-yes",:progress_track_updated_status_class=>"angry-icon-show"}
                                       ]
       @data_reader.projects.to_widget_data['Narrable'].should ==  narrable_expected_widget_data
     end
@@ -64,7 +64,7 @@ end
 
 describe RadiatorItem do
   before(:all) do
-    DateTime.should_receive(:now) { Date.parse("17-Jun-2013") }
+    #DateTime.should_receive(:now) { Date.parse("17-Jun-2013") }
     @radiator_item = RadiatorItem.new("Objective Quality", "Yes", DateTime.now.to_date.strftime("%m/%d/%Y"))
   end
 
@@ -72,9 +72,9 @@ describe RadiatorItem do
     @radiator_item.to_widget_data.should == {:label=> "Objective Quality", :progress_track_updated_status_class=>"angry-icon-hide", :class=>"label-yes"}
   end
 
-  it "should be recently updated if last update date is less than 7 working days" do
+  it "should be recently updated if last update date is less than 4 working days" do
     RadiatorItem.new("Objective Quality", "Yes", 12.days.ago).should_not be_updated_recently
-    RadiatorItem.new("Objective Quality", "Yes", 10.days.ago).should be_updated_recently
+    RadiatorItem.new("Objective Quality", "Yes", 1.days.ago).should be_updated_recently
   end
 
   it "should be recently updated if last updated date is less than 2 working days and it is the delivery schedule" do
@@ -84,6 +84,10 @@ describe RadiatorItem do
 
   it "should be red if there is no data" do
     RadiatorItem.new("Objective Quality", nil, nil).to_widget_data[:class].should == "label-no"
+  end
+
+  it "should return nil for last_updated if the date entered is wrong" do
+    RadiatorItem.new("Delivery Schedule", "Yes", "Aug -6").should_not be_updated_recently
   end
 
 end
