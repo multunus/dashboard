@@ -1,6 +1,6 @@
 require 'google_drive'
 
-SCHEDULER.every '5m', :first_in => 0 do
+SCHEDULER.every '60m', :first_in => 0 do
   radiator =  ProjectRadiatorReader.new
   radiator.fetch
   projects = radiator.projects.to_widget_data
